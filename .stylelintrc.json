@@ -21,5 +21,13 @@
     "comment-whitespace-inside": "always",
     "comment-empty-line-before": "always",
     "rule-empty-line-before": "always-multi-line"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        ".scss",
+        ".css"
+      ]
+    }
+  ]
 }
