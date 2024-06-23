@@ -1,1 +1,25 @@
-{ "extends": ["stylelint-config-standard"] }
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-prettier-scss",
+    "stylelint-config-property-sort-order-smacss"
+  ],
+  "rules": {
+    "indentation": 2,
+    "string-quotes": "single",
+    "color-hex-case": "lower",
+    "color-hex-length": "long",
+    "selector-class-pattern": "/[a-z]+((=\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?/",
+    "selector-no-qualifying-type": true,
+    "selector-no-id": true,
+    "selector-combinator-space-after": "always",
+    "selector-attribute-brackets-space-inside": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-colon-space-before": "always",
+    "declaration-colon-space-after": "always",
+    "comment-whitespace-inside": "always",
+    "comment-empty-line-before": "always",
+    "rule-empty-line-before": "always-multi-line"
+  }
+}
