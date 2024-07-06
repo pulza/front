@@ -41,6 +41,7 @@ export default tseslint.config(
       }],
       'no-unreachable': 'error',
       'no-unused-labels': 'error',
+      "@typescript-eslint/consistent-type-imports": "error",
       ...eslintPluginReactHooks.configs.recommended.rules,
       ...eslintPluginReact.configs.recommended.rules,
     },
