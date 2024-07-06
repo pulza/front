@@ -5,7 +5,7 @@ import React from 'react';
 const SignUpPage: React.FC = () => {
   return (
     <Grid fullWidth>
-      <Column lg={{ span: 8, offset: 4 }}>
+      <Column sm={{ span: 4, offset: 0 }} md={{ span: 8, offset: 0 }} lg={{ span: 8, offset: 4 }}>
         <SignUp />
       </Column>
     </Grid>
