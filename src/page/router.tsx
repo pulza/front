@@ -13,6 +13,10 @@ const router = createBrowserRouter([
     path: '/sign-up',
     lazy: () => lazyPageLoad('SignUpPage'),
   },
+  {
+    path: '/sign-in',
+    lazy: () => lazyPageLoad('SignInPage'),
+  },
 ]);
 
 const RouterProvider: React.FC = () => {
