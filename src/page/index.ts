@@ -1,3 +1,3 @@
-import { RouterProvider } from '@/page/router';
+import routers from '@/page/router';
 
-export { RouterProvider };
+export { routers };
