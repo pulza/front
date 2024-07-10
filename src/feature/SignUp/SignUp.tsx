@@ -9,6 +9,7 @@ import {
   usernameInputProps,
   type SignUpFormType,
 } from '@/feature/SignUp/SignUp.constants';
+import { useSignUp } from '@/feature/SignUp/useSignUp';
 
 const SignUp: React.FC<unknown> = () => {
   const {
@@ -18,14 +19,15 @@ const SignUp: React.FC<unknown> = () => {
       errors: { email: emailError, password: passwordError, username: usernameError },
     },
   } = useForm<SignUpFormType>();
+  const { signUpAndGoToHomepage } = useSignUp();
   const emailRegEx = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
   return (
     <FormContainer
       onSubmit={handleSubmit(
-        () => {
-          // submit to user form
+        async (formData) => {
+          await signUpAndGoToHomepage({ ...formData });
         },
         (e) => {
           console.log(e);

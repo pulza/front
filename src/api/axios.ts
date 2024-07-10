@@ -1,9 +1,16 @@
 import axios from 'axios';
+import { actions } from '@/store';
+import { GlobalEnvUtil } from '@/util/GlobalEnvUtil';
 
-axios.interceptors.response.use(
+const backendAxios = axios.create({
+  baseURL: GlobalEnvUtil.BACKEND_URL,
+});
+
+backendAxios.interceptors.response.use(
   (resposne) => resposne,
   (error) => {
     if (error.response.status === 401) {
+      actions.userSessionDeleteAction();
       window.location.href = '/sign-in';
     }
 
@@ -21,4 +28,4 @@ axios.interceptors.response.use(
   }
 );
 
-export default axios;
+export default backendAxios;

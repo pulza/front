@@ -1,5 +1,5 @@
 import { store } from '@/store/store';
-import type { UserRole, UserAtom } from '@/store/authAtom';
+import type { UserRole, UserAtomValue } from '@/store/authAtom';
 import { userAtom, userLoginAction, userSessionDeleteAction } from '@/store/authAtom';
 
 const actions = {
@@ -12,4 +12,4 @@ const atoms = {
 };
 
 export { store, actions, atoms };
-export type { UserRole, UserAtom };
+export type { UserRole, UserAtomValue };
