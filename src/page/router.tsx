@@ -20,6 +20,10 @@ const router = createBrowserRouter([
     lazy: () => lazyPageLoad('ErrorPage'),
     errorElement: <CommonErrorPage />,
   },
+  {
+    path: '/sign-in',
+    lazy: () => lazyPageLoad('SignInPage'),
+  },
 ]);
 
 const RouterProvider: React.FC = () => {
