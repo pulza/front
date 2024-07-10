@@ -23,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: '/sign-in',
     lazy: () => lazyPageLoad('SignInPage'),
+    errorElement: <CommonErrorPage />,
   },
 ]);
 
