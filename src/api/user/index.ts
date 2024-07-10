@@ -1,3 +1,3 @@
-import { requestSignUp } from '@/api/user/userApi';
+import { requestSignUp, requestSignIn } from '@/api/user/userApi';
 
-export { requestSignUp };
+export { requestSignUp, requestSignIn };

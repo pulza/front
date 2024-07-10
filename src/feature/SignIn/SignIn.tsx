@@ -1,32 +1,21 @@
 import { Button, FlexGrid, PasswordInput, Row, Stack, TextInput, Form } from '@carbon/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  emailInputProps,
-  goToSignUpPageButtonProps,
-  passwordInputProps,
-  submitButtonProps,
-  usernameInputProps,
-} from '@/feature/SignIn/SignIn.constants';
+import { goToSignUpPageButtonProps, passwordInputProps, submitButtonProps, usernameInputProps } from '@/feature/SignIn/SignIn.constants';
+import { requestSignIn } from '@/api/user';
 
 export const SignIn: React.FC = () => {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       username: '',
-      email: '',
       password: '',
     },
   });
   return (
     <Form
-      onSubmit={handleSubmit(
-        () => {
-          // submit to user form
-        },
-        (e) => {
-          console.log(e);
-        }
-      )}
+      onSubmit={handleSubmit(async ({ username, password }) => {
+        await requestSignIn({ id: username, password });
+      })}
     >
       <Stack gap={7}>
         <TextInput
@@ -36,7 +25,6 @@ export const SignIn: React.FC = () => {
             required: true,
           })}
         />
-        <TextInput {...{ ...emailInputProps }} {...register('email', { required: true })} />
         <PasswordInput {...{ ...passwordInputProps }} {...register('password', { required: true })} />
         <FlexGrid fullWidth>
           <Row>

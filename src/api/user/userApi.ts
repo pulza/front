@@ -1,5 +1,4 @@
 import axios from '@/api/axios';
-import type { UserRole } from '@/store';
 
 type SignUpRequestType = {
   username: string;
@@ -7,15 +6,20 @@ type SignUpRequestType = {
   password: string;
 };
 
-type SignUpResponse = {
-  username: string;
-  role: UserRole;
+const requestSignUp = async (signUpData: SignUpRequestType): Promise<void> => {
+  await axios.post<void>('/auth/signup', { ...signUpData });
 };
 
-const requestSignUp = async (signUpData: SignUpRequestType) => {
-  const { data } = await axios.post<SignUpResponse>('/sign-up', { ...signUpData });
-
-  return data;
+type SignInRequestType = {
+  id: string;
+  password: string;
 };
 
-export { requestSignUp };
+const requestSignIn = async (signInData: SignInRequestType): Promise<string> => {
+  const { data } = await axios.post<string>('/auth/login', { ...signInData });
+  const username = data;
+
+  return username;
+};
+
+export { requestSignUp, requestSignIn };
