@@ -34,13 +34,10 @@ export default tseslint.config(
   {
     rules: {
       'no-fallthrough': 'error',
-      "no-unused-vars": ["error", {
-        "vars": "all",
-        "args": "all",
-        "caughtErrors": "all",
-      }],
       'no-unreachable': 'error',
       'no-unused-labels': 'error',
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error"],
       "@typescript-eslint/consistent-type-imports": "error",
       ...eslintPluginReactHooks.configs.recommended.rules,
       ...eslintPluginReact.configs.recommended.rules,
