@@ -11,9 +11,9 @@ const useSignUp: useSignUpType = () => {
   const navigate = useNavigate();
 
   const signUpAndGoToHomepage = async (form: SignUpFormType) => {
-    const { role } = await requestSignUp({ ...form });
+    await requestSignUp({ ...form });
 
-    actions.userLoginAction({ email: form.email, id: form.username, role });
+    actions.userLoginAction({ username: form.username });
     navigate(0);
   };
 

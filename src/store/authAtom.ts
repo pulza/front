@@ -1,17 +1,12 @@
 import { atom } from 'jotai';
 import { store } from '@/store';
 
-export type UserRole = 'USER' | 'ADMIN';
 export type UserAtomValue = {
-  id: string;
-  email: string;
-  role: UserRole;
+  username: string;
 };
 
 const defaultUser: UserAtomValue = {
-  email: '',
-  id: '',
-  role: 'USER',
+  username: '',
 } as const;
 
 const userAtom = atom(defaultUser);
