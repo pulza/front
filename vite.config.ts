@@ -20,9 +20,11 @@ export default defineConfig(({ mode }) => {
     server: {
       host: 'localhost',
       port: 3000,
-      '/api': {
-        target: env.BACKEND_BASE_URL,
-        changeOrigin: true,
+      proxy: {
+        '/api': {
+          target: env.VITE_BACKEND_BASE_URL,
+          changeOrigin: true,
+        },
       },
     },
   };

@@ -2,16 +2,20 @@ import { atom } from 'jotai';
 import { store } from '@/store';
 
 export type UserAtomValue = {
-  username: string;
+  name: string;
+  email: string;
+  id: number;
+  role: number;
 };
 
 const defaultUser: UserAtomValue = {
-  username: '',
+  name: '',
+  email: '',
+  id: 0,
+  role: 0,
 } as const;
 
 const userAtom = atom(defaultUser);
-
-store.set(userAtom, defaultUser);
 
 const userLoginAction = (loginInfo: UserAtomValue) => {
   store.set(userAtom, (prev) => ({ ...prev, ...loginInfo }));
