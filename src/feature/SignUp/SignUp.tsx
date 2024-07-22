@@ -9,7 +9,7 @@ import {
   usernameInputProps,
   type SignUpFormType,
 } from '@/feature/SignUp/SignUp.constants';
-import { useSignUp } from '@/feature/SignUp/useSignUp';
+import { useSignUp } from '@/feature/SignUp/SignUp.hooks';
 
 const SignUp: React.FC<unknown> = () => {
   const {
@@ -25,24 +25,12 @@ const SignUp: React.FC<unknown> = () => {
 
   return (
     <FormContainer
-      onSubmit={handleSubmit(
-        async (formData) => {
-          await signUpAndGoToHomepage({ ...formData });
-        },
-        (e) => {
-          console.log(e);
-        }
-      )}
+      onSubmit={handleSubmit(async (formData) => {
+        await signUpAndGoToHomepage({ ...formData });
+      })}
     >
       <Stack gap={7}>
-        <TextInput
-          {...{ ...usernameInputProps, invalid: !!usernameError }}
-          {...(register('username'),
-          {
-            maxLength: 255,
-            required: true,
-          })}
-        />
+        <TextInput {...{ ...usernameInputProps, invalid: !!usernameError }} {...register('username', { required: true, maxLength: 255 })} />
         <TextInput
           {...{ ...emailInputProps, invalid: !!emailError }}
           {...register('email', { required: true, validate: (email) => emailRegEx.test(email), maxLength: 255 })}

@@ -1,7 +1,7 @@
 import axios from '@/api/axios';
 
 type SignUpRequestType = {
-  username: string;
+  name: string;
   email: string;
   password: string;
 };
@@ -11,7 +11,7 @@ const requestSignUp = async (signUpData: SignUpRequestType): Promise<void> => {
 };
 
 type SignInRequestType = {
-  id: string;
+  email: string;
   password: string;
 };
 
@@ -22,4 +22,29 @@ const requestSignIn = async (signInData: SignInRequestType): Promise<string> => 
   return username;
 };
 
-export { requestSignUp, requestSignIn };
+const requestLogout = async (token: string): Promise<void> => {
+  await axios.post<string>('/auth/logout', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+type UserInfoType = {
+  name: string;
+  email: string;
+  id: number;
+  role: number;
+};
+
+const requestUserInfo = async (userToken: string): Promise<UserInfoType> => {
+  const userInfoResponse = await axios.get<UserInfoType>('/users', {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
+
+  return userInfoResponse.data;
+};
+
+export { requestSignUp, requestSignIn, requestLogout, requestUserInfo };

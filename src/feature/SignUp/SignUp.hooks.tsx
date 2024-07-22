@@ -1,6 +1,5 @@
 import { requestSignUp } from '@/api/user';
 import type { SignUpFormType } from '@/feature/SignUp/SignUp.constants';
-import { actions } from '@/store';
 import { useNavigate } from 'react-router-dom';
 
 type useSignUpType = () => {
@@ -11,10 +10,9 @@ const useSignUp: useSignUpType = () => {
   const navigate = useNavigate();
 
   const signUpAndGoToHomepage = async (form: SignUpFormType) => {
-    await requestSignUp({ ...form });
+    await requestSignUp({ email: form.email, password: form.password, name: form.username });
 
-    actions.userLoginAction({ username: form.username });
-    navigate(0);
+    navigate('/sign-in');
   };
 
   return {

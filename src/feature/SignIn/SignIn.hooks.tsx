@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { requestSignIn } from '@/api/user';
-import { actions } from '@/store';
+import { atoms } from '@/store';
 import type { SignInFormType } from '@/feature/SignIn/SignIn.constants';
+import { requestUserInfo } from '@/api/user/userApi';
+import { useAtom } from 'jotai';
 
 type useSignUpType = () => {
   signInAndGoToHomepage: (form: SignInFormType) => Promise<void>;
@@ -9,12 +11,16 @@ type useSignUpType = () => {
 
 const useSignIn: useSignUpType = () => {
   const navigate = useNavigate();
+  const [, setUserAtom] = useAtom(atoms.userAtom);
 
   const signInAndGoToHomepage = async (form: SignInFormType) => {
-    const username = await requestSignIn({ id: form.username, password: form.password });
+    const loginToken = await requestSignIn({ ...form });
+    localStorage.setItem('PULZA_TK', loginToken);
 
-    actions.userLoginAction({ username });
-    navigate(0);
+    const user = await requestUserInfo(loginToken);
+    setUserAtom(user);
+
+    navigate('/');
   };
 
   return {

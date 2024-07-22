@@ -11,13 +11,27 @@ import {
   SwitcherItem,
 } from '@carbon/react';
 import { User } from '@carbon/react/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from '@/feature/Gnb/Gnb.module.scss';
+import { atoms } from '@/store';
+import { useAtom } from 'jotai';
+import { useAutoLogin, useLogout } from './Authentication.hook';
 
 export const Gnb: React.FC = () => {
   const [openUserMenu, setOpenUserMenu] = useState(false);
+  const [userAtom] = useAtom(atoms.userAtom);
+  const { autoLogin } = useAutoLogin();
+  const { logout } = useLogout();
+
+  const doLogoutClick = async () => {
+    logout();
+  };
+
+  useEffect(() => {
+    autoLogin();
+  }, [autoLogin]);
 
   return (
     <Header aria-label="header">
@@ -43,19 +57,25 @@ export const Gnb: React.FC = () => {
         </HeaderGlobalAction>
       </HeaderGlobalBar>
       <HeaderPanel expanded={openUserMenu}>
-        <Switcher aria-label="회원 메뉴">
-          <Link to="/sign-up" className={styles.userNav}>
-            <SwitcherItem aria-label="회원가입">회원가입</SwitcherItem>
-          </Link>
-          <Link to="/sign-in" className={styles.userNav}>
-            <SwitcherItem aria-label="로그인" href="/sign-in">
-              로그인
-            </SwitcherItem>
-          </Link>
-          <Link to="/" className={styles.userNav}>
-            <SwitcherItem aria-label="로그아웃">로그아웃</SwitcherItem>
-          </Link>
-        </Switcher>
+        {userAtom.id === 0 && (
+          <Switcher aria-label="회원 메뉴">
+            <Link to="/sign-up" className={styles.userNav}>
+              <SwitcherItem aria-label="회원가입">회원가입</SwitcherItem>
+            </Link>
+            <Link to="/sign-in" className={styles.userNav}>
+              <SwitcherItem aria-label="로그인" href="/sign-in">
+                로그인
+              </SwitcherItem>
+            </Link>
+          </Switcher>
+        )}
+        {userAtom.id !== 0 && (
+          <Switcher aria-label="회원 메뉴">
+            <Link to="/" className={styles.userNav} onClick={doLogoutClick}>
+              <SwitcherItem aria-label="로그아웃">로그아웃</SwitcherItem>
+            </Link>
+          </Switcher>
+        )}
       </HeaderPanel>
     </Header>
   );

@@ -3,16 +3,8 @@ import type { ButtonBaseProps } from '@carbon/react';
 import type { PasswordInputProps } from '@carbon/react/lib/components/TextInput/PasswordInput';
 
 const SIGN_IN_DEFAULT_VALUE = {
-  username: '',
-  password: '',
   email: '',
-};
-
-const usernameInputProps: TextInputAttributteProps = {
-  id: 'username',
-  labelText: '아이디',
-  required: true,
-  type: 'text',
+  password: '',
 };
 
 const passwordInputProps: PasswordInputProps = {
@@ -42,4 +34,4 @@ const goToSignUpPageButtonProps: ButtonBaseProps = {
 type SignInFormType = typeof SIGN_IN_DEFAULT_VALUE;
 
 export type { SignInFormType };
-export { SIGN_IN_DEFAULT_VALUE, emailInputProps, passwordInputProps, usernameInputProps, submitButtonProps, goToSignUpPageButtonProps };
+export { SIGN_IN_DEFAULT_VALUE, emailInputProps, passwordInputProps, submitButtonProps, goToSignUpPageButtonProps };
