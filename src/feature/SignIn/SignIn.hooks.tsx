@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { requestSignIn } from '@/api/user';
 import { atoms } from '@/store';
 import type { SignInFormType } from '@/feature/SignIn/SignIn.constants';
-import { requestUserInfo } from '@/api/user/userApi';
+import { requestUserInfo } from '@/api/user';
 import { useAtom } from 'jotai';
 
 type useSignUpType = () => {
